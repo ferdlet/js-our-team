@@ -1,63 +1,81 @@
 const membriTeam = 
 [
     {
-        'nome': 'Wayne',
-        'cognome': 'Barnett',
+        'nome': 'Wayne Barnett',
         'ruolo': 'Founder & CEO',
-        'image': 'wayne-barnett-founder-ceo.jpg'
+        'image': 'img/wayne-barnett-founder-ceo.jpg'
     },
     {
-        'nome': 'Angela',
-        'cognome': 'Caroll',
+        'nome': 'Angela Caroll',
         'ruolo': 'Chief Editor',
-        'image': 'angela-caroll-chief-editor.jpg'
+        'image': 'img/angela-caroll-chief-editor.jpg'
     },
     {
-        'nome': 'Walter',
-        'cognome': 'Gordon',
+        'nome': 'Walter Gordon',
         'ruolo': 'Office Manager',
-        'image': 'walter-gordon-office-manager.jpg'
+        'image': 'img/walter-gordon-office-manager.jpg'
     },
     {
-        'nome': 'Angela',
-        'cognome': 'Lopez',
+        'nome': 'Angela Lopez',
         'ruolo': 'Social Media Manager',
-        'image': 'angela-lopez-social-media-manager.jpg'
+        'image': 'img/angela-lopez-social-media-manager.jpg'
 
     },
     {
-        'nome': 'Scott',
-        'cognome': 'Estrada',
+        'nome': 'Scott Estrada',
         'ruolo': 'Developer',
-        'image': 'scott-estrada-developer.jpg'
+        'image': 'img/scott-estrada-developer.jpg'
     },
     {
-        'nome': 'Barbara',
-        'cognome': 'Ramos',
+        'nome': 'Barbara Ramos',
         'ruolo': 'Graphic Designer',
-        'image': 'barbara-ramos-graphic-designer.jpg'
+        'image': 'img/barbara-ramos-graphic-designer.jpg'
     },
 ];
 
+generateCard(membriTeam);
 
-const teamContainer = document.querySelector('.team-container');
+const addMember = document.getElementById('addMemberButton');
+addMember.addEventListener('click', function () {
+    addCard(membriTeam);
+    generateCard(membriTeam);
+})
 
-container.innerHTML = '';
+function generateCard(array) {
 
-for (let i = 0; i < membriTeam.length; i++) {
+    document.querySelector('.team-container').innerHTML = '';
+    let cards = '';
+    for (let i = 0; i < array.length; i++) {
+        cards +=
+            `
+        <div class="team-card">
+            <div class="card-image">
+            <img
+                src='${array[i].image}'
+                alt='${array[i].nome}'
+            />
+            </div>
+            <div class="card-text">
+            <h3>${array[i].nome}</h3>
+            <p>${array[i].ruolo}</p>
+            </div>
+        </div>
+        `;
 
-}
-
-
-function generateCard() {
-
-    const card = document.createElement('div');
-    card.classList.add('team-card');
-    const cardImage = document.createElement('div');
-    cardImage.classList.add('card-image')
-    card.innerHTML = cardImage;
-
-
-
-    return card;
+    }
+    console.log(cards);
+    document.querySelector('.team-container').innerHTML = cards;
 };
+
+
+function addCard(array) {
+    const newName = document.getElementById('name');
+    const newRole = document.getElementById('role');
+    const newImage = document.getElementById('image');
+    array.push({
+        'nome': newName.value,
+        'ruolo': newRole.value,
+        'image': newImage.value
+    });
+    console.log(array);
+}
